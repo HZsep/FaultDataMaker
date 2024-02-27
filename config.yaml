@@ -1,0 +1,90 @@
+
+num_classes: 20
+feature_nums: 41
+
+ori_data_len: 100
+new_data_len: 500
+
+train_ratio: 1.0
+
+normal_seq: []      #'box-cox', 'max-min','box-split','mean-std'
+
+gan: 'wgan-gp'  # 'normal'
+
+ori_data_path: './data/originalData.xlsx'
+
+
+
+new_data_path: './data/newData.xlsx'
+
+
+ori_data_stat_path: './save/stat_ori_data.json'
+new_data_stat_path: './save/stat_new_data.json'
+
+model_path: './save/model/'
+record_path: './save/record/'
+
+
+# dataloader setting
+# train dataset
+train_loader:
+  bs: 800
+  workers: 0       #   num_workers
+  shuffle: true
+  drop_last: false
+  pin_memory: false
+
+# validation dataset
+valid_loader:
+  bs: 100
+  workers: 0
+  shuffle: false
+  drop_last: false
+  pin_memory: true
+
+# test dataset
+test_loader:
+  bs: 200
+  workers: 0
+  shuffle: false
+  drop_last: false
+  pin_memory: true
+
+
+
+train:
+  num_epochs: 10000000
+  num_gpu: 0
+  seed: 42
+  smooth_value: 0.0
+
+
+gen_optim:
+  lr: 1e-2
+  type: "Adam"
+  betas: [0.9, 0.999]
+  weight_decay: 0
+
+
+dis_optim:
+  lr:
+    cls: 3e-3
+    gan: 1e-4
+  type: "Adam"
+  betas: [0.9, 0.999]
+#  momentum: 0.9
+  weight_decay: 0
+
+
+
+WGAN-GP:
+  lambda_gp: 10
+
+#: 'resnet50_1d', 'resnet101_1d', 'resnet152_1d'
+backbone:
+  dis:  'cnn'
+  gen:  'resnet50_1d'
+
+
+
+
